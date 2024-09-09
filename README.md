@@ -1,8 +1,10 @@
 # tax-lot-scripts
 Collection of scripts to expedite specific account actions to assist Advisory Tools
 
+> **Warning**
 > To make sure all the node deps are setup make sure to run ```npm i``` in the root of this repo
 
+> **Warning**
 > All scripts will need a valid **QA Admin API** access token. Replace the ```apiKey``` variable at the top of each script before use. 
 
 ## Remove all account Holdings
@@ -30,6 +32,7 @@ node .\create-lots-for-all-account-holdings.js {accountId}
 ```
 
 ## Add tax lots to Production accounts
+> **Warning**
 > The script requires a valid **PROD Admin API** access token.
 
 
