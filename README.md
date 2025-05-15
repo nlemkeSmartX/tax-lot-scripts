@@ -110,3 +110,55 @@ The `move-all-holdings-to-apm.js` script is a utility tool that moves all holdin
 - All trades are executed with zero commission
 - Only positions with positive quantities are transferred
 - Managed portfolio sleeves are skipped during transfer generation
+
+## Sync Account Holdings
+
+The `sync-account-holdings.js` script is a utility tool that compares account-level holdings with sleeve-level holdings and helps identify and resolve discrepancies. This is useful for ensuring data consistency between account and sleeve positions.
+
+### Features
+
+- Compares account-level holdings with aggregated sleeve holdings
+- Identifies discrepancies in position quantities
+- Provides detailed breakdown of holdings across all sleeves
+- Shows aggregated holdings across sleeves with market values
+- Can automatically add missing positions to the APM sleeve
+- Includes safety checks to preview changes before execution
+
+### Prerequisites
+
+- Node.js installed
+- Valid API key for the SmartX admin API
+- Account ID for the target account
+- `decimal.js` package installed (`npm install decimal.js`)
+
+### Usage
+
+1. Add your API key to the script:
+   ```javascript
+   const apiKey = 'your-api-key-here'
+   ```
+
+2. Run the script with an account ID:
+   ```bash
+   node sync-account-holdings.js <account-id>
+   ```
+
+3. To execute the trades to resolve discrepancies, add the `--run` flag:
+   ```bash
+   node sync-account-holdings.js <account-id> --run
+   ```
+
+### Safety Features
+
+- Runs in "preview mode" by default
+- Requires explicit `--run` flag to execute trades
+- Only adds missing positions (doesn't remove excess positions)
+- Provides detailed logging of all operations
+- Uses decimal.js for precise quantity calculations
+
+### Notes
+
+- The script uses the QA environment (`admin-api.qa.smartx.us`)
+- All trades are executed with zero commission
+- Only positive quantity discrepancies are automatically resolved
+- Uses the APM sleeve as the destination for missing positions
