@@ -59,3 +59,54 @@ node .\add-holdings-to-AT-TEST-567.js
 node .\remove-account-holdings.js c6762bef-a87f-4ef0-a4b1-5384250eef5c
 node .\add-holdings-to-AT-TEST-562.js
 ```
+
+## Move All Holdings to APM
+
+The `move-all-holdings-to-apm.js` script is a utility tool that moves all holdings from various sleeves in an account to the Active Portfolio Management (APM) sleeve. This is useful when consolidating holdings or restructuring account allocations.
+
+### Features
+
+- Automatically identifies the APM sleeve in the account
+- Scans all sleeves for current holdings
+- Generates a list of transfers needed to move holdings to the APM sleeve
+- Includes a safety check to preview transfers before execution
+- Provides detailed logging of transfer operations
+- Handles both buy and sell trades to properly transfer positions
+
+### Prerequisites
+
+- Node.js installed
+- Valid API key for the SmartX admin API
+- Account ID for the target account
+
+### Usage
+
+1. Add your API key to the script:
+   ```javascript
+   const apiKey = 'your-api-key-here'
+   ```
+
+2. Run the script with an account ID:
+   ```bash
+   node move-all-holdings-to-apm.js <account-id>
+   ```
+
+3. To execute the transfers (after reviewing the proposed changes), add the `--run` flag:
+   ```bash
+   node move-all-holdings-to-apm.js <account-id> --run
+   ```
+
+### Safety Features
+
+- The script runs in "preview mode" by default, showing all proposed transfers without executing them
+- The `--run` flag must be explicitly provided to execute transfers
+- Each transfer is logged with detailed information about source and destination sleeves
+- A summary of successful and failed transfers is provided at the end of execution
+
+
+### Notes
+
+- The script uses the QA environment (`admin-api.qa.smartx.us`)
+- All trades are executed with zero commission
+- Only positions with positive quantities are transferred
+- Managed portfolio sleeves are skipped during transfer generation
